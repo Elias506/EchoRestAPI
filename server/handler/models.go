@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/labstack/echo"
 	repModels "github.com/elias506/EchoRestAPI/repository/models"
+	"github.com/labstack/echo"
 )
 
 type CustomContext struct {

@@ -1,9 +1,9 @@
 package handler
 
 import (
+	repModels "github.com/elias506/EchoRestAPI/repository/models"
 	"github.com/labstack/echo"
 	"net/http"
-	repModels "github.com/elias506/EchoRestAPI/repository/models"
 )
 
 func GetUsers(c echo.Context) error {

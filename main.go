@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./server"
+	"github.com/elias506/EchoRestAPI/server"
 	"log"
 )
 

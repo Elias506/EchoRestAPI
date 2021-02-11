@@ -3,18 +3,18 @@ package repository
 import (
 	"encoding/json"
 	. "github.com/elias506/EchoRestAPI/models"
+	"github.com/elias506/EchoRestAPI/repository/models"
 	"io/ioutil"
 	"os"
 )
 
 type FileDB struct {
-	path string
-	file *os.File
+	models.FileDB
 }
 
 func (db FileDB) open() error {
 	var err error
-	db.file, err = os.Open(db.path)
+	db.File, err = os.Open(db.Path)
 	if err != nil {
 		return err
 	}
@@ -22,11 +22,11 @@ func (db FileDB) open() error {
 }
 
 func (db *FileDB) close() {
-	_ = db.file.Close()
+	_ = db.File.Close()
 }
 
 func (db *FileDB) read() (*Users, error) {
-	body, err := ioutil.ReadAll(db.file)
+	body, err := ioutil.ReadAll(db.File)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (db *FileDB) write(users *Users) error {
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile(db.path, newBody, 0644)
+	err = ioutil.WriteFile(db.Path, newBody, 0644)
 	if err != nil {
 		return err
 	}

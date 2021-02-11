@@ -2,11 +2,11 @@ package handler
 
 import (
 	"fmt"
+	"github.com/elias506/EchoRestAPI/models"
+	repModels "github.com/elias506/EchoRestAPI/repository/models"
 	"github.com/labstack/echo"
 	"net/http"
 	"strconv"
-	"github.com/elias506/EchoRestAPI/models"
-	repModels "github.com/elias506/EchoRestAPI/repository/models"
 )
 
 func UpdateUser(c echo.Context) error {
