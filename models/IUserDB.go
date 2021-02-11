@@ -1,8 +1,4 @@
-package models2
-
-import (
-	. "github.com/elias506/EchoRestAPI/models"
-)
+package models
 
 type IUserDB interface {
 	GetUser(id int) (*User, error)
