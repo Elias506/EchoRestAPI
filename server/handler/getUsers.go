@@ -11,7 +11,7 @@ func GetUsers(c echo.Context) error {
 
 	users, err := IGetUsers(cc.UserDB)
 	if err != nil {
-		return err
+		return cc.JSON(http.StatusBadRequest, err)
 	}
 	return cc.JSON(http.StatusOK, users)
 }

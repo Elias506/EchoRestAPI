@@ -12,11 +12,11 @@ func GetUser(c echo.Context) error {
 
 	userID, err := strconv.Atoi(cc.Param("id"))
 	if err != nil {
-		return err
+		return cc.JSON(http.StatusBadRequest, err)
 	}
 	user, err := IGetUser(cc.UserDB, userID)
 	if err != nil {
-		return err
+		return cc.JSON(http.StatusInternalServerError, err)
 	}
 	return cc.JSON(http.StatusOK, user)
 }

@@ -28,7 +28,7 @@ func (a *App) Run(port string) error {
 	a.server.Use(middleware.Logger())
 	a.server.Use(middleware.Recover())
 
-	// Init routes
+	// Init routes and custom context
 	u := a.server.Group("/users")
 	u.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {

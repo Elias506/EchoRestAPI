@@ -26,7 +26,7 @@ func (db *FileDB) close() {
 }
 
 func (db *FileDB) read() (*Users, error) {
-	body, err := ioutil.ReadAll(db.File)
+	body, err := ioutil.ReadFile(db.Path)
 	if err != nil {
 		return nil, err
 	}
