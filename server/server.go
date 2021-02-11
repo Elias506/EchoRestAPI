@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"github.com/elias506/EchoRestAPI/repository"
 	"github.com/elias506/EchoRestAPI/repository/models"
 	"github.com/elias506/EchoRestAPI/server/handler"
 	"github.com/labstack/echo"
@@ -10,10 +11,6 @@ import (
 	"os/signal"
 	"time"
 )
-
-type FileDB struct {
-	models.FileDB
-}
 
 type App struct {
 	server *echo.Echo
@@ -70,7 +67,7 @@ func (a *App) Shutdown(ctx context.Context) error {
 }
 
 func (a *App) InitFileDB(path string) {
-	a.UserDB = &FileDB{
+	a.UserDB = &repository.FileDB{
 		Path: path,
 	}
 }

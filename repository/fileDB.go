@@ -3,13 +3,13 @@ package repository
 import (
 	"encoding/json"
 	. "github.com/elias506/EchoRestAPI/models"
-	"github.com/elias506/EchoRestAPI/repository/models"
 	"io/ioutil"
 	"os"
 )
 
 type FileDB struct {
-	models.FileDB
+	Path string
+	File *os.File
 }
 
 func (db FileDB) open() error {
