@@ -2,18 +2,18 @@ package server
 
 import (
 	"context"
+	rep "github.com/elias506/EchoRestAPI/repository"
+	"github.com/elias506/EchoRestAPI/server/handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"os"
 	"os/signal"
 	"time"
-	"github.com/elias506/EchoRestAPI/repository/models"
-	"github.com/elias506/EchoRestAPI/server/handler"
 )
 
 type App struct {
 	server *echo.Echo
-	UserDB models.IUserDB
+	UserDB rep.IUserDB
 }
 
 func NewApp() *App {
@@ -31,7 +31,7 @@ func (a *App) Run(port string) error {
 	u := a.server.Group("/users")
 	u.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			cc := &models.CustomContext{c, a.UserDB}
+			cc := &CustomContext{c, a.UserDB}
 			return next(cc)
 		}
 	})
@@ -44,11 +44,11 @@ func (a *App) Run(port string) error {
 	// Start listening
 	a.server.Logger.Fatal(a.server.Start(":" + port))
 
-	go func(){
+	go func() {
 		if err := a.server.Start(":" + port); err != nil {
 			a.server.Logger.Info("Failed to listen and serve:", err)
 		}
-	}() 
+	}()
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt)
@@ -66,7 +66,7 @@ func (a *App) Shutdown(ctx context.Context) error {
 }
 
 func (a *App) InitFileDB(path string) {
-	a.UserDB = &models.FileDB{
+	a.UserDB = &rep.FileBD{
 		path: path,
 	}
 }

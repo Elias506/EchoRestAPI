@@ -2,11 +2,15 @@ package repository
 
 import (
 	"encoding/json"
-	"github.com/elias506/EchoRestAPI/models"
+	. "github.com/elias506/EchoRestAPI/models"
 	"io/ioutil"
 	"os"
-	"github.com/elias506/EchoRestAPI/repository/models"
 )
+
+type FileDB struct {
+	path string
+	file *os.File
+}
 
 func (db FileDB) open() error {
 	var err error
@@ -113,7 +117,7 @@ func (db *FileDB) UpdateUser(id int, reqUser *RequestUser) (int, error) {
 	if err != nil {
 		return -1, err
 	}
-	
+
 	for i, u := range users.Users {
 		if id == u.ID {
 

@@ -1,14 +1,8 @@
-package models
+package repository
 
 import (
-	"github.com/elias506/EchoRestAPI/models"
-	"os"
+	. "github.com/elias506/EchoRestAPI/models"
 )
-
-type FileDB struct {
-	path string
-	file *os.File
-}
 
 type IUserDB interface {
 	GetUser(id int) (*User, error)

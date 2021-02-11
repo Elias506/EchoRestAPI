@@ -1,10 +1,10 @@
 package handler
 
 import (
+	repModels "github.com/elias506/EchoRestAPI/repository/models"
 	"github.com/labstack/echo"
 	"net/http"
 	"strconv"
-	repModels "github.com/elias506/EchoRestAPI/repository/models"
 )
 
 func GetUser(c echo.Context) error {
