@@ -22,6 +22,7 @@ ___
 Update info about user:
 ```
 PUT /users/"id"
+{name: "newName"}
 ```
 ___
 Delete user by ID
