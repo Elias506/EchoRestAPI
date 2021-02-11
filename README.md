@@ -1,6 +1,6 @@
 # EchoRestAPI
 
-Rest Apu on Echo framework
+Rest Api with Echo framework
 Using User model with fields: ID and Name
 
 Get all users:
