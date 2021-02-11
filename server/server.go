@@ -2,9 +2,9 @@ package server
 
 import (
 	"context"
-	"github.com/elias506/EchoRestAPI/repository"
-	"github.com/elias506/EchoRestAPI/repository/models"
-	"github.com/elias506/EchoRestAPI/server/handler"
+	. "github.com/elias506/EchoRestAPI/models"
+	r "github.com/elias506/EchoRestAPI/repository"
+	h "github.com/elias506/EchoRestAPI/server/handler"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"os"
@@ -14,7 +14,7 @@ import (
 
 type App struct {
 	server *echo.Echo
-	UserDB models.IUserDB
+	UserDB IUserDB
 }
 
 func NewApp() *App {
@@ -32,15 +32,18 @@ func (a *App) Run(port string) error {
 	u := a.server.Group("/users")
 	u.Use(func(next echo.HandlerFunc) echo.HandlerFunc {
 		return func(c echo.Context) error {
-			cc := &CustomContext{c, a.UserDB}
+			cc := &CustomContext{
+				Context: c,
+				UserDB:  a.UserDB,
+			}
 			return next(cc)
 		}
 	})
-	u.GET("", handler.GetUsers)
-	u.GET("/:id", handler.GetUser)
-	u.DELETE("/:id", handler.DeleteUser)
-	u.POST("/", handler.AddUser)
-	u.PUT("/:id", handler.UpdateUser)
+	u.GET("", h.GetUsers)
+	u.GET("/:id", h.GetUser)
+	u.DELETE("/:id", h.DeleteUser)
+	u.POST("/", h.AddUser)
+	u.PUT("/:id", h.UpdateUser)
 
 	// Start listening
 	a.server.Logger.Fatal(a.server.Start(":" + port))
@@ -67,7 +70,7 @@ func (a *App) Shutdown(ctx context.Context) error {
 }
 
 func (a *App) InitFileDB(path string) {
-	a.UserDB = &repository.FileDB{
+	a.UserDB = &r.FileDB{
 		Path: path,
 	}
 }

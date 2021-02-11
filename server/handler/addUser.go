@@ -2,8 +2,7 @@ package handler
 
 import (
 	"fmt"
-	"github.com/elias506/EchoRestAPI/models"
-	. "github.com/elias506/EchoRestAPI/repository/models"
+	. "github.com/elias506/EchoRestAPI/models"
 	"github.com/labstack/echo"
 	"net/http"
 )
@@ -11,12 +10,12 @@ import (
 func AddUser(c echo.Context) error {
 	cc := c.(*CustomContext)
 
-	reqUser := &models.RequestUser{}
+	reqUser := &RequestUser{}
 	if err := cc.Bind(reqUser); err != nil {
 		fmt.Println(err)
 		return err
 	}
-	newUserID, err := IAddUser(cc.IUserDB, reqUser)
+	newUserID, err := IAddUser(cc.UserDB, reqUser)
 	if err != nil {
 		fmt.Println(err)
 		return err

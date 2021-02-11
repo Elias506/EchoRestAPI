@@ -2,8 +2,7 @@ package handler
 
 import (
 	"fmt"
-	"github.com/elias506/EchoRestAPI/models"
-	repModels "github.com/elias506/EchoRestAPI/repository/models"
+	. "github.com/elias506/EchoRestAPI/models"
 	"github.com/labstack/echo"
 	"net/http"
 	"strconv"
@@ -16,12 +15,12 @@ func UpdateUser(c echo.Context) error {
 		fmt.Println(err)
 		return err
 	}
-	reqUser := &models.RequestUser{}
+	reqUser := &RequestUser{}
 	if err := cc.Bind(reqUser); err != nil {
 		fmt.Println(err)
 		return err
 	}
-	updatedUserID, err := repModels.IUpdateUser(cc.IUserDB, userID, reqUser)
+	updatedUserID, err := IUpdateUser(cc.UserDB, userID, reqUser)
 	if err != nil {
 		fmt.Println(err)
 		return err

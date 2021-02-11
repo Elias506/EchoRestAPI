@@ -1,7 +1,7 @@
 package handler
 
 import (
-	repModels "github.com/elias506/EchoRestAPI/repository/models"
+	. "github.com/elias506/EchoRestAPI/models"
 	"github.com/labstack/echo"
 	"net/http"
 	"strconv"
@@ -14,7 +14,7 @@ func GetUser(c echo.Context) error {
 	if err != nil {
 		return err
 	}
-	user, err := repModels.IGetUser(cc.IUserDB, userID)
+	user, err := IGetUser(cc.UserDB, userID)
 	if err != nil {
 		return err
 	}
