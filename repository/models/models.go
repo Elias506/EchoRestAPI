@@ -1,7 +1,8 @@
-package repository
+package models
 
 import (
 	. "github.com/elias506/EchoRestAPI/models"
+	"os"
 )
 
 type IUserDB interface {
@@ -10,6 +11,11 @@ type IUserDB interface {
 	DeleteUser(id int) (int, error)
 	UpdateUser(id int, reqUser *RequestUser) (int, error)
 	AddUser(reqUser *RequestUser) (int, error)
+}
+
+type FileDB struct {
+	Path string
+	File *os.File
 }
 
 func IGetUser(i IUserDB, id int) (*User, error) {
