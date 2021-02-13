@@ -46,8 +46,6 @@ func (a *App) Run(port string) error {
 	u.PUT("/:id", h.UpdateUser)
 
 	// Start listening
-	a.server.Logger.Fatal(a.server.Start(":" + port))
-
 	go func() {
 		if err := a.server.Start(":" + port); err != nil {
 			a.server.Logger.Info("Failed to listen and serve:", err)
